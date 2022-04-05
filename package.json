@@ -1,0 +1,19 @@
+{
+  "name": "remindy",
+  "version": "0.0.1",
+  "description": "A tool to remind you to do things",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BluAxolotl/Remindy.git"
+  },
+  "author": "BluAxolotl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BluAxolotl/Remindy/issues"
+  },
+  "homepage": "https://github.com/BluAxolotl/Remindy#readme"
+}
