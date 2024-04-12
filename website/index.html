@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Bluto Website</title>
+		<link href="icon.png" rel="icon" type="image/png" sizes="32x32" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div id="new-task-form">
+			<div>Title: <input id="new-task-title" type="text"></div>
+			<div>Due: <input id="new-task-due" type="datetime-local"></div>
+			<div>Rerminder: <input id="new-task-reminder" type="datetime-local"></div>
+
+			<div>Repeats: <input id="new-task-repeats" type="checkbox" checked></div>
+
+			<div>Frequency: <input id="new-task-repeat-amount" type="number"></div>
+
+			<select id="new-task-repeat-unit">
+				<option value="days">Days</option>
+				<option value="weeks">Weeks</option>
+				<option value="months">Months</option>
+				<option value="years">Years</option>
+			</select>
+
+			<div style="display: flex; flex-direction: column;">Message: <textarea id="new-task-reminder-message"></textarea></div>
+
+			<button id="new-task-submit">SUBMIT</button>
+		</div>
+		<div id="task-popup">
+			<button id="task-popup-complete">Mark as Complete</button>
+			<button id="task-popup-uncomplete">Mark as Uncomplete</button>
+			<button id="task-popup-edit">Edit Task</button>
+			<button id="task-popup-delete">Delete Task</button>
+			<button id="task-popup-snooze">Add Snooze</button>
+		</div>
+		<div id="fade"></div>
+
+		<div id="header">
+			<button id="back-header-button">MONTH</button>
+			<button id="prev-header-button">PREV</button>
+			<button id="next-header-button">NEXT</button>
+			<button id="new-header-button">NEW</button>
+		</div>
+		<div style="display: none;" id="week-header"></div>
+		<!-- <div class="main" id="main-day"></div> -->
+		<!-- <div class="main" id="main-week"></div> -->
+		<div class="main" id="main-month"></div>
+		<div id="task-containers"></div>
+		<div id="buttons"></div>
+
+		<!-------- SCRIPTS -------->
+
+		<!-- PACKAGES -->
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="blulib.js"></script>
+		<script src="moment.min.js"></script>
+
+		<!-- SOURCE -->
+		<script src="main.js"></script>
+	</body>
+</html>

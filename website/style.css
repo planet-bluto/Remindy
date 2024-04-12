@@ -1,0 +1,248 @@
+@font-face {
+ font-family: Rubik Mono One;
+ src: url(assets/fonts/RubikMonoOne-Regular.ttf);
+}
+
+body {
+/*	display: flex;*/
+    flex-direction: column;
+	color: white;
+	font-family: Rubik Mono One;
+	background: #151515;
+	margin: 0px;
+	width: calc(100vw - 30px);
+	height: calc(100vh - 30px);
+	padding: 15px;
+	overflow: hidden;
+}
+
+p {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+button {
+	border: none;
+	border-radius: 15px;
+	background: #024aca;
+}
+
+#new-header-button {
+	background: #8CD612;
+}
+
+#header {
+    display: flex;
+    width: calc(100% - 30px);
+    height: calc(80px - 30px);
+    background: #252525;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    padding: 15px;
+    gap: 15px;
+}
+
+#header > button {
+	width: 160px;
+	font-family: Rubik Mono One;
+	font-size: 24px;
+	color: white;
+}
+
+#week-header {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 15px;
+}
+
+.week-header-week {
+    display: flex;
+    width: 100%;
+    height: 64px;
+    background: #024aca;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-month {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    height: calc(100% - 64px - 30px)
+}
+
+#main-month > * {
+	width: 100%;
+	height: 100%;
+}
+
+.month-week {
+	display: flex;
+	gap: 15px;
+}
+
+.month-week > * {
+	width: 100%;
+	height: 100%;
+}
+
+.month-week:not([active]):hover > * {
+	filter: brightness(1.5);
+}
+
+.month-date {
+    background: #252525;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-align: -webkit-center;
+}
+
+.month-date[disabled] {
+	opacity: 0.25;
+}
+
+.month-week[active] > * {
+	opacity: 1.0;
+	background: #024aca;
+}
+
+.month-date[today] {
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	border: #0A89FF 5px solid;
+}
+
+#task-containers {
+	display: none;
+	gap: 15px;
+}
+
+.task-container {
+    display: grid;
+    grid-auto-rows: min-content;
+    flex-direction: column;
+    background: #252525;
+    width: 100%;
+    height: calc(100% - 15px - 80px - 64px);
+    border-radius: 15px;
+    gap: 15px;
+    overflow-y: scroll;
+    /* flex-flow: wrap-reverse; */
+    /* flex-wrap: wrap; */
+}
+
+.task {
+    display: none;
+    flex-direction: column;
+    background: #353535;
+    width: calc(100% - 16px);
+    height: calc(240px - 16px);
+    border-radius: 15px;
+    padding: 8px;
+}
+
+.task[completed] { opacity: 0.5 }
+
+.task-title {
+	font-size: 24px;
+}
+
+.task-time-exact { opacity: 0.5; }
+.task-time-relative { opacity: 0.5; }
+
+#task-containers[active] { display: flex; }
+
+#task-containers[active] > .task-container > .task {
+	display: flex;
+}
+
+.task-container::-webkit-scrollbar {
+  display: none;
+}
+
+/*.task-container::-webkit-scrollbar {
+  width: 10px;
+  height: calc(100% - 128px);
+  border-radius: 10px;
+}
+
+.task-container::-webkit-scrollbar-track {
+  background: var(--theme-back);
+}
+ 
+.task-container::-webkit-scrollbar-thumb {
+  background: var(--theme-back-pos2); 
+  border-radius: 10px;
+}
+
+.task-container::-webkit-scrollbar-corner {
+  background: var(--theme-back);
+  border-radius: 10px;
+}*/
+
+#fade {
+	display: none;
+	position: absolute;
+	z-index: 100;
+	top: -15px;
+	left: -15px;
+	width: calc(100vw + 15px);
+	height: calc(100vh + 15px);
+	opacity: 0.85;
+	background: #000;
+}
+
+#fade[active] { display: block; }
+
+#new-task-form {
+	display: none;
+	flex-direction: column;
+	gap: 15px;
+	position: absolute;
+	z-index: 101;
+	background: #252525;
+	padding: 15px;
+	border-radius: 15px;
+}
+
+#new-task-form[active] { display: flex; }
+
+#new-task-form > button {
+	width: 128px;
+	height: 32px;
+	color: white;
+	font-family: Rubik Mono One;
+}
+
+#task-popup {
+	display: none;
+	flex-direction: column;
+	gap: 15px;
+	position: absolute;
+	z-index: 101;
+	background: #252525;
+	padding: 15px;
+	border-radius: 15px;
+}
+
+#task-popup[active] { display: flex; }
+
+#task-popup > button {
+	background: #024aca;
+	color: white;
+	font-family: Rubik Mono One;
+	width: auto;
+	height: 64px;
+	font-size: 32px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
