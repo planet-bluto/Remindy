@@ -45,7 +45,7 @@ function TEMPLATE_TASK() {
 		due: moment(moment(Date.now()).format("YYYY-MM-DDTH:mm")),
 		reminder: {
 			time: moment(moment(Date.now()).format("YYYY-MM-DDTH:mm")),
-			message: "@everyone You need to {title} right now"
+			message: '@everyone\n# ⏰ {title}\n### {due_relative}'
 		},
 		repeats: {
 			amount: 1,
