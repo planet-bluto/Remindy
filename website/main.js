@@ -274,7 +274,7 @@ function fillOutTaskContainers(week = current_week) {
 
 				var task_elem_time_exact = new Elem("p")
 				task_elem_time_exact.classes.add("task-time-exact")
-				task_elem_time_exact.text = moment(task.due).format("H:mm A")
+				task_elem_time_exact.text = moment(task.due).format("h:mm A")
 				task_elem.addChild(task_elem_time_exact)
 
 				var task_elem_time_relative = new Elem("p")
