@@ -13,6 +13,7 @@ var task_popup_elem = new Elem("task-popup")
 var task_popup_complete_elem = new Elem("task-popup-complete")
 var task_popup_uncomplete_elem = new Elem("task-popup-uncomplete")
 var task_popup_edit_elem = new Elem("task-popup-edit")
+var task_popup_duplicate_elem = new Elem("task-popup-duplicate")
 var task_popup_delete_elem = new Elem("task-popup-delete")
 var task_popup_snooze_elem = new Elem("task-popup-snooze")
 
@@ -353,6 +354,17 @@ function fillOutTaskContainers(week = current_week) {
 					task_popup_snooze_elem.notOn("click")
 					task_popup_snooze_elem.on("click", e => {
 
+					})
+
+
+					task_popup_duplicate_elem.notOn("click")
+					task_popup_duplicate_elem.on("click", e => {
+						loadTaskToForm(task)
+
+						closeAllPopups()
+
+						fade_elem.setAttr("active", "")
+						new_task_form_elem.setAttr("active", "")
 					})
 
 				})
