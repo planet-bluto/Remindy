@@ -577,10 +577,10 @@ function loadTaskToForm(task) {
 	title_elem.value = task["title"]
 
 	var due_elem = new Elem("new-task-due")
-	due_elem.value = moment(task["due"]).format("YYYY-MM-DDTH:mm")
+	due_elem.value = moment(task["due"]).format("YYYY-MM-DDTHH:mm")
 
 	var reminder_time_elem = new Elem("new-task-reminder")
-	reminder_time_elem.value = moment(task["reminder"]["time"]).format("YYYY-MM-DDTH:mm")
+	reminder_time_elem.value = moment(task["reminder"]["time"]).format("YYYY-MM-DDTHH:mm")
 
 	var reminder_message_elem = new Elem("new-task-reminder-message")
 	reminder_message_elem.value = task["reminder"]["message"]
