@@ -270,7 +270,7 @@ function fillOutTaskContainers(week = current_week) {
 		        a_tier - b_tier
 		    )
 		})
-		
+
 		these_tasks.forEach(task => {
 			if (isOnDay(date.valueOf(), task.due, task.repeats)) {
 				var task_elem = new Elem("div")
@@ -289,9 +289,15 @@ function fillOutTaskContainers(week = current_week) {
 
 				var task_elem_time_relative = new Elem("p")
 				task_elem_time_relative.classes.add("task-time-relative")
-				task_elem_time_relative.text = moment(task.due).fromNow()
+
+				var due_on_date = moment(task.due)
+				due_on_date.year(date.year())
+				due_on_date.month(date.month())
+				due_on_date.date(date.date())
+
+				task_elem_time_relative.text = due_on_date.fromNow()
 				timestampInts.push(setInterval(() => {
-					task_elem_time_relative.text = moment(task.due).fromNow()
+					task_elem_time_relative.text = due_on_date.fromNow()
 				}, 1000))
 				task_elem.addChild(task_elem_time_relative)
 
