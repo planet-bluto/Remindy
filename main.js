@@ -166,6 +166,7 @@ io.on("connection", socket => {
 client.on("ready", async () => {
 	print(`+ ${client.user.username} has logged in!`)
 	startServer()
+	setTimeout(startLoop, ((Math.ceil(Date.now()/SECOND)*SECOND) - Date.now()))
 })
 
 async function safeSend(channel_id, ...args) {
@@ -208,7 +209,7 @@ function isEqualTime(date, base) {
 }
 
 var current_time = null
-setTimeout(() => {
+function startLoop() {
 	setInterval(async () => {
 		var toStandard = (timestamp) => { return moment(timestamp).format("H:mm A") }
 
@@ -227,9 +228,14 @@ setTimeout(() => {
 					var isCompleted = task.completed.includes(moment().format("YYYY-MM-DD"))
 
 					if (isRightNow(pleasant_timestamp, TaskDB.data.reminder.time, TaskDB.data.repeats)) {
+						var due_on_date = moment(task.due)
+						due_on_date.year(moment().year())
+						due_on_date.month(moment().month())
+						due_on_date.date(moment().date())
+
 						var msg_content = TaskDB.data.reminder.message
 						msg_content = msg_content.replaceAll("{title}", TaskDB.data.title)
-						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(TaskDB.data.due / 1000)}:R>`)
+						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(due_on_date.valueOf() / 1000)}:R>`)
 						await safeSend("1227714666554331309", {content: msg_content})
 					}
 				}
@@ -237,4 +243,4 @@ setTimeout(() => {
 
 		}
 	}, 16)
-}, ((Math.ceil(Date.now()/SECOND)*SECOND) - Date.now()))
+}
