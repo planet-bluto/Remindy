@@ -262,7 +262,14 @@ function fillOutTaskContainers(week = current_week) {
 		// task_container
 
 		var these_tasks = task_cache.toSorted((a, b) => {
-		    var toTier = obj => {return (Number(obj.completed.includes(date.format("YYYY-MM-DD"))) * (task_cache.length**2)) + (Number(obj.repeats != null) * (task_cache.length**1)) + ((obj.due / 1000000000000) * (task_cache.length**0))}
+			var toOnDate = (timestamp) => {
+				var due_on_date = moment(timestamp)
+				due_on_date.year(date.year())
+				due_on_date.month(date.month())
+				due_on_date.date(date.date())
+				return due_on_date.valueOf()
+			}
+		    var toTier = obj => {return (Number(obj.completed.includes(date.format("YYYY-MM-DD"))) * (task_cache.length**2)) + (Number(obj.repeats != null) * (task_cache.length**1)) + ((toOnDate(obj.due) / 1000000000000) * (task_cache.length**0))}
 		    var a_tier = toTier(a)
 		    var b_tier = toTier(b)
 		    
