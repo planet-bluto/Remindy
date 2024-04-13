@@ -261,7 +261,17 @@ function fillOutTaskContainers(week = current_week) {
 		task_container.classes.add("task-container")
 		// task_container
 
-		task_cache.forEach(task => {
+		var these_tasks = task_cache.toSorted((a, b) => {
+		    var toTier = obj => {return (Number(obj.completed.includes(date.format("YYYY-MM-DD"))) * (task_cache.length**2)) + (Number(obj.repeats != null) * (task_cache.length**1)) + ((obj.due / 1000000000000) * (task_cache.length**0))}
+		    var a_tier = toTier(a)
+		    var b_tier = toTier(b)
+		    
+		    return (
+		        a_tier - b_tier
+		    )
+		})
+		
+		these_tasks.forEach(task => {
 			if (isOnDay(date.valueOf(), task.due, task.repeats)) {
 				var task_elem = new Elem("div")
 
