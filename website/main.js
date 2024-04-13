@@ -284,17 +284,20 @@ function fillOutTaskContainers(week = current_week) {
 
 				task_elem.classes.add("task")
 
+				/// TASK TITLE ///
 				var task_elem_title = new Elem("p")
 				task_elem_title.classes.add("task-title")
 				task_elem_title.text = task.title
 				task_elem.addChild(task_elem_title)
 
+				/// EXACT TIMESTAMP ///
 				var task_elem_time_exact = new Elem("p")
 				task_elem_time_exact.classes.add("task-time-exact")
 				task_elem_time_exact.classes.add("task-time")
 				task_elem_time_exact.text = moment(task.due).format("h:mm A")
 				task_elem.addChild(task_elem_time_exact)
 
+				/// RELATIVE TIMESTAMP ///
 				var task_elem_time_relative = new Elem("p")
 				task_elem_time_relative.classes.add("task-time-relative")
 				task_elem_time_relative.classes.add("task-time")
@@ -305,27 +308,33 @@ function fillOutTaskContainers(week = current_week) {
 				due_on_date.date(date.date())
 
 				task_elem_time_relative.text = due_on_date.fromNow()
-				timestampInts.push(setInterval(() => {
-					task_elem_time_relative.text = due_on_date.fromNow()
-				}, 1000))
 				task_elem.addChild(task_elem_time_relative)
 
+				/// REMINDER TIMESTAMP ///
 				var task_elem_time_reminder = new Elem("p")
 				task_elem_time_reminder.classes.add("task-time-exact")
 				task_elem_time_reminder.classes.add("task-time")
 
 				var diff = task.due - task.reminder.time
-				var reminder_on_date = due_on_date.subtract(diff, "ms")
+				var reminder_on_date = moment(due_on_date).subtract(diff, "ms")
 
 				task_elem_time_reminder.text = `🔔 ${reminder_on_date.fromNow()}`
 				task_elem.addChild(task_elem_time_reminder)
 
+				/// UPDATE RELATIVE TIMESTAMPS ///
+				timestampInts.push(setInterval(() => {
+					task_elem_time_relative.text = due_on_date.fromNow()
+					task_elem_time_reminder.text = `🔔 ${reminder_on_date.fromNow()}`
+				}, 1000))
+
+				/// COMPLETED RENDERING ///
 				if (!Array.isArray(task.completed)) { task.completed = [] }
 				var isCompleted = task.completed.includes(date.format("YYYY-MM-DD"))
 				if (isCompleted) {
 					task_elem.setAttr("completed", "")
 				}
 
+				/// CLICK POPUP ///
 				task_elem.on("click", e => {
 					fade_elem.setAttr("active", "")
 					task_popup_elem.setAttr("active", "")
