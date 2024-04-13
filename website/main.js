@@ -40,12 +40,12 @@ const UNITS = {
 }
 
 function TEMPLATE_TASK() {
-	print(moment(Date.now()).format("YYYY-MM-DDTH:mm"))
+	print(moment(Date.now()).format("YYYY-MM-DDTHH:mm"))
 	return {
 		title: "New Task",
-		due: moment(moment(Date.now()).format("YYYY-MM-DDTH:mm")),
+		due: moment(moment(Date.now()).format("YYYY-MM-DDTHH:mm")),
 		reminder: {
-			time: moment(moment(Date.now()).format("YYYY-MM-DDTH:mm")),
+			time: moment(moment(Date.now()).format("YYYY-MM-DDTHH:mm")),
 			message: '@everyone\n# {title}\n### **Due:** {due_relative}'
 		},
 		repeats: {
@@ -534,12 +534,12 @@ new_task_form_submit.on("click", async e => {
 	task["title"] = title_elem.value
 
 	var due_elem = new Elem("new-task-due")
-	task["due"] = moment(due_elem.value, "YYYY-MM-DDTH:mm").valueOf()
+	task["due"] = moment(due_elem.value, "YYYY-MM-DDTHH:mm").valueOf()
 
 	task["reminder"] = {}
 	var reminder_time_elem = new Elem("new-task-reminder")
 	// print(reminder_time_elem.value, (reminder_time_elem.value == ""), task["due"], moment(reminder_time_elem.value, moment.DATETIME_LOCAL).valueOf())
-	task["reminder"]["time"] = (reminder_time_elem.value == "" ? task["due"] : moment(reminder_time_elem.value, "YYYY-MM-DDTH:mm").valueOf())
+	task["reminder"]["time"] = (reminder_time_elem.value == "" ? task["due"] : moment(reminder_time_elem.value, "YYYY-MM-DDTHH:mm").valueOf())
 
 	var reminder_message_elem = new Elem("new-task-reminder-message")
 	task["reminder"]["message"] = reminder_message_elem.value

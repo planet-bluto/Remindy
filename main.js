@@ -201,8 +201,8 @@ function isEqualDate(date, base) {
 }
 
 function isEqualTime(date, base) {
-	var pleasant_date = moment(moment(date).format("YYYY-MM-DDTH:mm")).valueOf()
-	var pleasant_base = moment(moment(base).format("YYYY-MM-DDTH:mm")).valueOf()
+	var pleasant_date = moment(moment(date).format("YYYY-MM-DDTHH:mm")).valueOf()
+	var pleasant_base = moment(moment(base).format("YYYY-MM-DDTHH:mm")).valueOf()
 
 	return (pleasant_date == pleasant_base)
 }
@@ -213,11 +213,10 @@ setTimeout(() => {
 		var toStandard = (timestamp) => { return moment(timestamp).format("H:mm A") }
 
 		var this_current_time = toStandard(Date.now())
-		var pleasant_timestamp = moment(moment(Date.now()).format("YYYY-MM-DDTH:mm")).valueOf()
+		var pleasant_timestamp = moment(moment().format("YYYY-MM-DDTHH:mm")).valueOf()
 
 		if (current_time != this_current_time) { //// NEW MINUTE
 			current_time = this_current_time
-			print(pleasant_timestamp)
 
 			var keys = await DB.keys()
 			keys.forEach(async key => {
