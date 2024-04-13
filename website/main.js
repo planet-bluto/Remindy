@@ -291,11 +291,13 @@ function fillOutTaskContainers(week = current_week) {
 
 				var task_elem_time_exact = new Elem("p")
 				task_elem_time_exact.classes.add("task-time-exact")
+				task_elem_time_exact.classes.add("task-time")
 				task_elem_time_exact.text = moment(task.due).format("h:mm A")
 				task_elem.addChild(task_elem_time_exact)
 
 				var task_elem_time_relative = new Elem("p")
 				task_elem_time_relative.classes.add("task-time-relative")
+				task_elem_time_relative.classes.add("task-time")
 
 				var due_on_date = moment(task.due)
 				due_on_date.year(date.year())
@@ -307,6 +309,16 @@ function fillOutTaskContainers(week = current_week) {
 					task_elem_time_relative.text = due_on_date.fromNow()
 				}, 1000))
 				task_elem.addChild(task_elem_time_relative)
+
+				var task_elem_time_reminder = new Elem("p")
+				task_elem_time_reminder.classes.add("task-time-exact")
+				task_elem_time_reminder.classes.add("task-time")
+
+				var diff = task.due - task.reminder.time
+				var reminder_on_date = due_on_date.subtract(diff, "ms")
+
+				task_elem_time_reminder.text = `🔔 ${reminder_on_date.fromNow()}`
+				task_elem.addChild(task_elem_time_reminder)
 
 				if (!Array.isArray(task.completed)) { task.completed = [] }
 				var isCompleted = task.completed.includes(date.format("YYYY-MM-DD"))

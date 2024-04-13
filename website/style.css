@@ -156,8 +156,7 @@ button {
 	font-size: 24px;
 }
 
-.task-time-exact { opacity: 0.5; }
-.task-time-relative { opacity: 0.5; }
+.task-time { opacity: 0.5; }
 
 #task-containers[active] { display: flex; }
 
