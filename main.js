@@ -77,7 +77,7 @@ app.get("/", (req, res) => {
 
 io.on("connection", socket => {
 	socket.on("message", async content => {
-		var channel = await client.channels.fetch("1227714666554331309")
+		var channel = await client.channels.fetch(process.env["channel_id"])
 		await channel.send(content)
 	})
 
@@ -236,7 +236,7 @@ function startLoop() {
 						var msg_content = TaskDB.data.reminder.message
 						msg_content = msg_content.replaceAll("{title}", TaskDB.data.title)
 						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(due_on_date.valueOf() / 1000)}:R>`)
-						await safeSend("1227714666554331309", {content: msg_content})
+						await safeSend(process.env["channel_id"], {content: msg_content})
 					}
 				}
 			})
