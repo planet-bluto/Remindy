@@ -201,8 +201,8 @@ function isEqualDate(date, base) {
 }
 
 function isEqualTime(date, base) {
-	var pleasant_date = moment(moment(date).format("YYYY-MM-DDThh:mm")).valueOf()
-	var pleasant_base = moment(moment(base).format("YYYY-MM-DDThh:mm")).valueOf()
+	var pleasant_date = moment(moment(date).format("YYYY-MM-DDTH:mm")).valueOf()
+	var pleasant_base = moment(moment(base).format("YYYY-MM-DDTH:mm")).valueOf()
 
 	return (pleasant_date == pleasant_base)
 }
