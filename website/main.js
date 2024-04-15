@@ -569,9 +569,13 @@ new_button.on("click", e => {
 })
 
 new_task_form_submit.on("click", async e => {
-	var task = {
-		completed: [],
-		snooze: {}
+	if (editingTask == null) {
+		var task = {
+			completed: [],
+			snooze: {}
+		}
+	} else {
+		var task = {}
 	}
 
 	var title_elem = new Elem("new-task-title")

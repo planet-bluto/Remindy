@@ -145,7 +145,12 @@ io.on("connection", socket => {
 		print("Editing...: ", editingTask.id + ":" + editingTask.title)
 		var TaskDB = await DB.fetch(`tasks/${editingTask.id}`)
 
-		TaskDB.data = task
+		print(TaskDB.data, task)
+
+		Object.keys(task).forEach(key => {
+			TaskDB.data[key] = task[key]
+		})
+
 		TaskDB.data["id"] = editingTask.id
 
 		await TaskDB.write()
