@@ -269,7 +269,7 @@ function fillOutTaskContainers(week = current_week) {
 				due_on_date.date(date.date())
 				return due_on_date.valueOf()
 			}
-		    var toTier = obj => {return (Number(obj.completed.includes(date.format("YYYY-MM-DD"))) * (task_cache.length**2)) + (Number(obj.repeats != null) * (task_cache.length**1)) + ((toOnDate(obj.due) / 1000000000000) * (task_cache.length**0))}
+		    var toTier = obj => {return (Number(obj.completed.includes(date.format("YYYY-MM-DD"))) * (task_cache.length**2)) + (Number(obj.repeats != null) * (task_cache.length**1)) + ((toOnDate(obj.reminder.time) / 1000000000000) * (task_cache.length**0))}
 		    var a_tier = toTier(a)
 		    var b_tier = toTier(b)
 		    
