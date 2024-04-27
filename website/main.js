@@ -310,21 +310,30 @@ function fillOutTaskContainers(week = current_week) {
 				task_elem_time_relative.text = due_on_date.fromNow()
 				task_elem.addChild(task_elem_time_relative)
 
-				/// REMINDER TIMESTAMP ///
-				var task_elem_time_reminder = new Elem("p")
-				task_elem_time_reminder.classes.add("task-time-exact")
-				task_elem_time_reminder.classes.add("task-time")
-
+				/// REMINDER DEFICIT ///
 				var diff = task.due - task.reminder.time
 				var reminder_on_date = moment(due_on_date).subtract(diff, "ms")
 
-				task_elem_time_reminder.text = `🔔 ${reminder_on_date.fromNow()}`
-				task_elem.addChild(task_elem_time_reminder)
+				/// REMINDER EXACT TIMESTAMP ///
+				var task_elem_time_reminder_exact = new Elem("p")
+				task_elem_time_reminder_exact.classes.add("task-time-exact")
+				task_elem_time_reminder_exact.classes.add("task-time")
+
+				task_elem_time_reminder_exact.text = `🔔 ${reminder_on_date.format("h:mm A")}`
+				task_elem.addChild(task_elem_time_reminder_exact)
+
+				/// REMINDER RELATIVE TIMESTAMP ///
+				var task_elem_time_reminder_relative = new Elem("p")
+				task_elem_time_reminder_relative.classes.add("task-time-relative")
+				task_elem_time_reminder_relative.classes.add("task-time")
+
+				task_elem_time_reminder_relative.text = `🔔 ${reminder_on_date.fromNow()}`
+				task_elem.addChild(task_elem_time_reminder_relative)
 
 				/// UPDATE RELATIVE TIMESTAMPS ///
 				timestampInts.push(setInterval(() => {
 					task_elem_time_relative.text = due_on_date.fromNow()
-					task_elem_time_reminder.text = `🔔 ${reminder_on_date.fromNow()}`
+					task_elem_time_reminder_relative.text = `🔔 ${reminder_on_date.fromNow()}`
 				}, 1000))
 
 				/// COMPLETED RENDERING ///
