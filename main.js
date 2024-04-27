@@ -241,7 +241,7 @@ function startLoop() {
 						var msg_content = TaskDB.data.reminder.message
 						msg_content = msg_content.replaceAll("{title}", TaskDB.data.title)
 						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(due_on_date.valueOf() / 1000)}:R>`)
-						await safeSend(process.env["channel_id"], {content: msg_content})
+						await safeSend(process.env["channel_id"], {content: msg_content + `\n\n[Open in Browser](http://192.168.1.${process.env["address"]}:4848/)`})
 					}
 				}
 			})
