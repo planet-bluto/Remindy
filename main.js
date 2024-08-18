@@ -59,21 +59,21 @@ const io = new Server(httpserver, {
   maxHttpBufferSize: 100e6
 })
 
-const WebSocket = require("ws")
-const ws = new WebSocket("ws://192.168.1.135:9697")
-// wss.send = function (...args) {
-//   wss.clients.forEach(client => {
-//     client.send(...args)
-//   })
-// }
+const {WebSocketServer} = require("ws")
+const wss = new WebSocketServer({port: 4849})
+wss.send = function (...args) {
+  wss.clients.forEach(client => {
+    client.send(...args)
+  })
+}
 
-// function _get_ws_msg(type, ...args) {
-//   return JSON.stringify({ type, args })
-// }
+function _get_ws_msg(type, ...args) {
+  return JSON.stringify({ type, args })
+}
 
-// function WssSend(type, ...args) {
-//   wss.send(_get_ws_msg(type, ...args))
-// }
+function WssSend(type, ...args) {
+  wss.send(_get_ws_msg(type, ...args))
+}
 
 function startServer() {
 	httpserver.listen((process.env["port"] || 4848), "0.0.0.0", (e) => {
@@ -259,7 +259,8 @@ function startLoop() {
 						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(due_on_date.valueOf() / 1000)}:R>`)
 
 						safeSend(process.env["channel_id"], {content: msg_content + `\n\n[Open in Browser](http://192.168.1.${process.env["address"]}:4848/)`})
-						ws.send(JSON.stringify({type: "remindy", args: [task]}))
+						// ws.send(JSON.stringify({type: "remindy", args: [task]}))
+						WssSend("remindy", task)
 					}
 				}
 			})
