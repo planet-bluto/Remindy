@@ -59,6 +59,22 @@ const io = new Server(httpserver, {
   maxHttpBufferSize: 100e6
 })
 
+const WebSocket = require("ws")
+const ws = new WebSocket("ws://192.168.1.135:9697")
+// wss.send = function (...args) {
+//   wss.clients.forEach(client => {
+//     client.send(...args)
+//   })
+// }
+
+// function _get_ws_msg(type, ...args) {
+//   return JSON.stringify({ type, args })
+// }
+
+// function WssSend(type, ...args) {
+//   wss.send(_get_ws_msg(type, ...args))
+// }
+
 function startServer() {
 	httpserver.listen((process.env["port"] || 4848), "0.0.0.0", (e) => {
 		print("+ Server Listening!")
@@ -241,7 +257,9 @@ function startLoop() {
 						var msg_content = TaskDB.data.reminder.message
 						msg_content = msg_content.replaceAll("{title}", TaskDB.data.title)
 						msg_content = msg_content.replaceAll("{due_relative}", `<t:${Math.round(due_on_date.valueOf() / 1000)}:R>`)
-						await safeSend(process.env["channel_id"], {content: msg_content + `\n\n[Open in Browser](http://192.168.1.${process.env["address"]}:4848/)`})
+
+						safeSend(process.env["channel_id"], {content: msg_content + `\n\n[Open in Browser](http://192.168.1.${process.env["address"]}:4848/)`})
+						ws.send(JSON.stringify({type: "remindy", args: [task]}))
 					}
 				}
 			})
